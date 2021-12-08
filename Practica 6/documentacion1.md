@@ -8,6 +8,8 @@ El código solo funciona en GET a la hora de explotar, por falta de tiempo. Pero
 
 El código puede ser un poco caotico, ya que es la primera vez que desarrollo una herramienta en Python e iba con falta de tiempo.
 
+Tienes tanto el script como la documentación y screenshoots en mi repositorio de [GitHub](https://github.com/MainDavis/Ciber).
+
 ## Uso
 
 ```bash
