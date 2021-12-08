@@ -8,6 +8,15 @@ El código solo funciona en GET a la hora de explotar, por falta de tiempo. Pero
 
 El código puede ser un poco caotico, ya que es la primera vez que desarrollo una herramienta en Python e iba con falta de tiempo.
 
+## Uso
+
+```bash
+python3 scanner.py [url]
+```
+
+```bash
+python3 scanner.py "http://testphp.vulnweb.com/listproducts.php?cat=1"
+```
 ## Código
 
 ```python
