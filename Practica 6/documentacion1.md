@@ -478,8 +478,6 @@ Cuando termine de recopilar toda la información, se mostrará un menu en el que
 
 ## Output RAW
 
-Se ha deformado el output al cambiar el tamaño.
-
 ```text
 
 ❯ python3 scanner.py "http://testphp.vulnweb.com/listproducts.php?cat=17&prueba=5"

