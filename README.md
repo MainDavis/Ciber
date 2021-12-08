@@ -1,3 +1,3 @@
-# PRACTICA 3 - TEMA 6
+# Ciber 3º
 
-Este repositorio tiene la documentación de los tres ejercicios como el script Scanner.py
+Repositorio para guardar todas las prácticas de Ciber
