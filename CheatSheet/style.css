@@ -21,5 +21,13 @@ body{
 }
 
 a:visited {
-    color: #0285ff; /* verde */
+    color: #1fad36; /* verde */
+}
+
+a {
+    color: #7dc926; /* verde */
+}
+
+.vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td {
+    border-color: greenyellow;
 }

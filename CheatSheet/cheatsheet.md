@@ -2,6 +2,29 @@
 
 # CheatSheet Ciberseguridad
 
+## Indice
+
+- [CheatSheet Ciberseguridad](#cheatsheet-ciberseguridad)
+  - [Indice](#indice)
+  - [Vulnerabilidades](#vulnerabilidades)
+  - [Cross Site Scripting - XSS](#cross-site-scripting---xss)
+    - [Tipos de XSS](#tipos-de-xss)
+    - [Evasión de filtros de seguridad](#evasión-de-filtros-de-seguridad)
+    - [Robo de Cookies](#robo-de-cookies)
+  - [SQL Injection](#sql-injection)
+    - [Tipos de SQL Injection](#tipos-de-sql-injection)
+    - [Identificación de vulnerabilidades](#identificación-de-vulnerabilidades)
+      - [Comprobar vulnerabilidad](#comprobar-vulnerabilidad)
+      - [Tipo del parámetro vulnerable](#tipo-del-parámetro-vulnerable)
+      - [Número de columnas a devolver](#número-de-columnas-a-devolver)
+    - [Bypass de un login](#bypass-de-un-login)
+    - [Explotacion](#explotacion)
+    - [Boolean-Base Blind SQL Injection](#boolean-base-blind-sql-injection)
+    - [Time-Base Blind SQL Injection](#time-base-blind-sql-injection)
+    - [Evitar filtros](#evitar-filtros)
+
+***
+
 ## Vulnerabilidades
 
 ## Cross Site Scripting - XSS
@@ -149,7 +172,7 @@ Al ser todo verdadero devolverá la tabla completa de usuarios.
 
 En caso de querer entrar en una cuenta en específico bastaría con cambiar el usuario a el que queremos acceder y dejamos el password con la frase mágica.
 
-### Explotación
+### Explotacion
 
 1. Recopilación de información sobre usuarios, versión, etc.
    - **User()**: Que usuario ejecuta las consultas en la app.
