@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+    color: greenyellow;
+    font-size: large
+}
+
+.vscode-light pre {
+    background-color: rgba(76, 96, 73, 0.4);
+}
+
+.vscode-light .hljs-keyword, .vscode-light .hljs-selector-tag, .vscode-light .hljs-built_in, .vscode-light .hljs-name, .vscode-light .hljs-tag {
+    color: #00cfff;
+}
+
+.vscode-light .hljs-string, .vscode-light .hljs-title, .vscode-light .hljs-section, .vscode-light .hljs-attribute, .vscode-light .hljs-literal, .vscode-light .hljs-template-tag, .vscode-light .hljs-template-variable, .vscode-light .hljs-type {
+    color: #fff;
+}
+
+.vscode-light table > thead > tr > th {
+    border-color: greenyellow;
+}
+
+a:visited {
+    color: #1fad36; /* verde */
+}
+
+a {
+    color: #7dc926; /* verde */
+}
+
+.vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td {
+    border-color: greenyellow;
+}

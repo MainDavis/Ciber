@@ -14,3 +14,6 @@
 - [ ] Spider, REF: Skipfish
 - [ ] GoBuster X Spider
 - [ ] Nikto
+- [ ] Nmap
+
+<link rel="stylesheet" type="text/css" media="all" href="style.css" />
