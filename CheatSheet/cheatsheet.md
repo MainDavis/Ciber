@@ -22,6 +22,8 @@
     - [Boolean-Base Blind SQL Injection](#boolean-base-blind-sql-injection)
     - [Time-Base Blind SQL Injection](#time-base-blind-sql-injection)
     - [Evitar filtros](#evitar-filtros)
+  - [Hacking en redes](#hacking-en-redes)
+    - [Examen](#examen)
 
 ***
 
@@ -288,3 +290,34 @@ SELECT usuario FROM usuarios WHERE usuario='' or 1=1 -- -'
 - Envitar AND y OR:
   - AND -> &&
   - OR -> ||
+
+***
+
+## Hacking en redes
+
+### Examen
+
+- 1. ¿En qué consiste configurar la tarjeta de red en modo "monitor"?
+  - Capturar paquetes de cualquier red sin definir cliente.
+- 2. ¿Para qué es habitualmente usada la técnica ARP Spoofing?
+  - Alterar la relación entre IP y MAC de un cliente.
+- 3. ¿Cómo puede desarrollarse la técnica DHCP Spoofing?
+  - Desplegando un servidor DHCP falso en la red.
+- 4. ¿Cuál de las siguiente afirmaciones es cierta respector de un sistema de distribución?
+  - Todos los APs comparten un mismo ESSID.
+- 5. ¿Cuál es el significado del concepto "Station" en redes Wi-Fi?
+  - La MAC del cliente de una red.
+- 6. ¿En que tipo de red es necesario capturar el handshake al realizar el proceso de cracking con el que obtener la clave en claro de acceso?
+  - WPA/WPA2 - PSK.
+- 7. ¿Qué tipo de acción/es podrían realizarse directamente al desarrollar ataques contra clientes en redes Wi-Fi?
+  - Capturar credenciales o información sensible.
+  - Realizar ataques DDoS.
+- 8. ¿Cuál de las siguientes opciones aporta un mayor nivel de seguridad en una red Wi-Fi?
+  - WPA2-Enterprise.
+- 9. ¿Puede un cliente en un red Wi-Fi estar conectado a dos puntos de acceso a la vez en un sistema de distribución?
+  - Falso.
+- 10. ¿Es posible desarrollar un ataque MiTM basado en ARP Spoofing entre dos equipos en Internet?
+  - Falso.
+- 11. Explicar el proceso para realizar de forma completa proceso de MiTM basado en ARP Spoofing. Indica además como sería posible realizar un ataque de DoS mediante esta misma técnica.
+  - Se envian paquetes ARP reply a la victima para que se piense que somos el equipo con quien se quiere comunicar.
+  - El ataque DoS se puede realizar redirigiendo todas las comunicaciones de tu victima a tu equipo y que no las deje pasar a su destino.
