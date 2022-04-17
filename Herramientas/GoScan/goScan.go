@@ -11,6 +11,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/cheggaaa/pb/v3"
 	"github.com/fatih/color"
 )
 
@@ -47,7 +48,7 @@ func main() {
 		ASNscan(target, threads)
 	case "RE":
 		obtenerDominios(threads)
-
+		fmt.Println("\n[+] Escaneo completado")
 	default:
 		color.Red("[X] Modo de ejecución no válido")
 	}
@@ -579,6 +580,8 @@ func Worker(url string, worker chan [][]string, wg *sync.WaitGroup) {
 
 func obtenerDominios(threads int) {
 
+	color.Yellow("\n[!] Obteniendo dominios de los rangos Ipv4 e Ipv6\n\n")
+
 	// Leo ip_ranges.csv y recogo todos los rangos ipv4 y ipv6
 	file, err := os.Open("ip_ranges.csv")
 
@@ -638,8 +641,10 @@ func obtenerDominios(threads int) {
 
 	var wg sync.WaitGroup
 
+	bar := pb.StartNew(len(rangos))
+
 	for i := 0; i < len(rangos); i++ {
-		go getDominio(chan_rangos, chan_dominios, &wg)
+		go getDominio(chan_rangos, chan_dominios, &wg, bar)
 	}
 
 	for _, rango := range rangos {
@@ -648,11 +653,12 @@ func obtenerDominios(threads int) {
 	}
 
 	for i := 0; i < len(rangos); i++ {
+
 		datos := <-chan_dominios
+
 		for _, datos := range datos {
 			// Escribo en el archivo
 			err := writer.Write(datos)
-
 			if err != nil {
 				color.Red("[-] Error al escribir en el archivo")
 				return
@@ -663,21 +669,25 @@ func obtenerDominios(threads int) {
 
 	wg.Wait()
 
+	bar.Finish()
+
 	color.Green("\n[+] Archivo creado: dominios.csv")
+
+	close(chan_rangos)
+	close(chan_dominios)
 
 }
 
-func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync.WaitGroup) {
+func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync.WaitGroup, bar *pb.ProgressBar) {
 
 	// Creo la url para la API Sonar
 	url := "https://sonar.omnisint.io/reverse/" + <-chan_rangos
-
-	color.Yellow("[!] Llamando a la API: " + url)
 
 	resp, err := http.Get(url)
 
 	if err != nil {
 		color.Red("Error al llamar a la API")
+		wg.Done()
 		return
 	}
 
@@ -687,11 +697,14 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 
 	if string(body) == "{\"error\":\"no results found\"}" {
 		chan_dominios <- [][]string{}
+		bar.Increment()
+		wg.Done()
 		return
 	}
 
 	if err != nil {
 		color.Red("Error al leer el body")
+		wg.Done()
 		return
 	}
 
@@ -699,6 +712,7 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 
 	if err := json.Unmarshal(body, &json_map); err != nil {
 		color.Red("Error al leer el JSONN")
+		wg.Done()
 		return
 	}
 
@@ -716,7 +730,7 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 		}
 	}
 
-	color.Yellow("[!] Rango terminado")
+	bar.Increment()
 
 	chan_dominios <- dominios
 
