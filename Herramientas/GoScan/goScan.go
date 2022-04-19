@@ -50,7 +50,6 @@ func main() {
 		ASNscan(target, threads)
 	case "RE":
 		obtenerDominios(threads)
-		fmt.Println("\n[+] Escaneo completado")
 	default:
 		color.Red("[X] Modo de ejecución no válido")
 	}
@@ -753,7 +752,7 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 
 	body, err := ioutil.ReadAll(resp.Body)
 
-	if string(body) == "{\"error\":\"no results found\"}" {
+	if string(body) == "{\"error\":\"no results found\"}" || string(body) == "{\"error\":\"IPv6 is not supproted\"}" || string(body) == "404 page not found" {
 		chan_dominios <- [][]string{}
 		bar.Increment()
 		wg.Done()
@@ -769,7 +768,8 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 	json_map := map[string][]string{}
 
 	if err := json.Unmarshal(body, &json_map); err != nil {
-		color.Red("Error al leer el JSONN")
+		color.Red("Error al leer el JSON")
+		color.Red(string(body))
 		wg.Done()
 		return
 	}
