@@ -9,6 +9,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/cheggaaa/pb/v3"
@@ -630,9 +632,26 @@ func obtenerDominios(threads int) {
 
 	defer writer.Flush()
 
+	// Preparo el archivo subdominos.csv
+
+	file, err = os.Create("subdominios.csv")
+
+	if err != nil {
+		color.Red("[-] Error al crear el archivo")
+		return
+	}
+
+	defer file.Close()
+
+	writerSubdominios := csv.NewWriter(file)
+
+	defer writerSubdominios.Flush()
+
 	// Escribo los encabezados
 
 	writer.Write([]string{"Dominio", "IP", "Numero de subdominios"})
+
+	writerSubdominios.Write([]string{"Subdominio", "Dominio", "IP"})
 
 	// Creo el canal para los hilos
 
@@ -652,13 +671,24 @@ func obtenerDominios(threads int) {
 		chan_rangos <- rango
 	}
 
+	dominios := make(map[string][]string)
+	ips := make(map[string][]string)
+
 	for i := 0; i < len(rangos); i++ {
 
 		datos := <-chan_dominios
 
 		for _, datos := range datos {
-			// Escribo en el archivo
-			err := writer.Write(datos)
+
+			// Saco los dominios de las url
+			dominioSplit := strings.Split(datos[0], ".")
+
+			dominio := dominioSplit[len(dominioSplit)-2] + "." + dominioSplit[len(dominioSplit)-1]
+
+			dominios[dominio] = append(dominios[dominio], datos[0])
+
+			ips[dominio] = append(ips[dominio], datos[1])
+
 			if err != nil {
 				color.Red("[-] Error al escribir en el archivo")
 				return
@@ -667,14 +697,42 @@ func obtenerDominios(threads int) {
 		}
 	}
 
+	// Escribo el archivo dominios.csv
+
+	for dominio, subdominio := range dominios {
+
+		writer.Write([]string{
+			dominio,
+			ips[dominio][0],
+			strconv.Itoa(len(subdominio)),
+		})
+
+	}
+
+	// Escribo el archivo subdominios.csv
+
+	for dominio, subdominio := range dominios {
+
+		for i, subdominio := range subdominio {
+
+			writerSubdominios.Write([]string{
+				subdominio,
+				dominio,
+				ips[dominio][i],
+			})
+
+		}
+
+	}
+
 	wg.Wait()
 
 	bar.Finish()
 
-	color.Green("\n[+] Archivo creado: dominios.csv")
-
 	close(chan_rangos)
 	close(chan_dominios)
+
+	color.Green("\n[+] Archivos creados: dominios.csv, subdominios.csv")
 
 }
 
@@ -724,8 +782,8 @@ func getDominio(chan_rangos chan string, chan_dominios chan [][]string, wg *sync
 
 		for _, dominio := range value {
 			dominios = append(dominios, []string{
-				key,
 				dominio,
+				key,
 			})
 		}
 	}
