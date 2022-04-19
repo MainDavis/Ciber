@@ -28,7 +28,7 @@ func main() {
 		threads int
 	)
 
-	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tAS: Obtener ASN y Rangos IP\n\tRE: Obtener dominios de los Rangos IP")
+	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tAS: Obtener ASN y Rangos IP\n\tRE: Hacer REverse DNS Lookup para sacar dominio y subdominios (Requiere ip_ranges.csv)")
 	flag.StringVar(&target, "target", "", "Target a escanear")
 	flag.IntVar(&threads, "t", 1, "Número de hilos")
 
