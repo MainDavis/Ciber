@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -28,7 +29,7 @@ func main() {
 		threads int
 	)
 
-	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tAS: Obtener ASN y Rangos IP\n\tRE: Hacer REverse DNS Lookup para sacar dominio y subdominios (Requiere ip_ranges.csv)")
+	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tAS: Obtener ASN y Rangos IP\n\tSO: Utiliza la API Sonar para sacar dominios y subdominios (Requiere ip_ranges.csv)\n\tRE: Utiliza REverse DNS para sacar dominios y subdominios")
 	flag.StringVar(&target, "target", "", "Target a escanear")
 	flag.IntVar(&threads, "t", 1, "Número de hilos")
 
@@ -48,11 +49,116 @@ func main() {
 			return
 		}
 		ASNscan(target, threads)
-	case "RE":
+	case "SO":
 		obtenerDominios(threads)
+	case "RE":
+		if len(target) == 0 {
+			color.Red("[!] Uso: main.go --mode <mode> --target <taget>\n\n")
+			flag.PrintDefaults()
+			return
+		}
+		reverseDNS(target, threads)
 	default:
 		color.Red("[X] Modo de ejecución no válido")
 	}
+
+}
+
+func reverseDNS(target string, threads int) {
+
+	color.Yellow("[!] Obteniendo dominios y subdominios de " + target + " ...\n\n")
+
+	url := "https://sonar.omnisint.io/all/" + target
+
+	// Llamo a la API
+
+	resp, err := http.Get(url)
+
+	if err != nil {
+		color.Red("Error al llamar a la API")
+		return
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		color.Red("Error al leer el body")
+		return
+	}
+
+	// Creo un array con los resultados
+	var subdominios []string
+
+	err = json.Unmarshal(body, &subdominios)
+
+	if err != nil {
+		color.Red("Error al leer el JSON")
+		return
+	}
+
+	color.Green("[+] Obtenidos " + strconv.Itoa(len(subdominios)) + " subdominios\n\n")
+	color.Green("[+] Escaneando subdominios ...\n\n")
+
+	// Escaneo los subdominios
+
+	var wg sync.WaitGroup
+	worker := make(chan map[string][]string, threads)
+
+	for _, subdominio := range subdominios {
+		wg.Add(1)
+		/*ip, err := net.LookupIP(subdominio)
+
+		if err != nil {
+			color.Red("Error al obtener IP")
+			continue
+		}
+
+		for _, ip := range ip {
+			fmt.Println("Domino: " + subdominio + " IP: " + ip.String())
+		}*/
+
+		go analizarSubdominio(subdominio, &wg, worker)
+	}
+
+	for i := 0; i < len(subdominios); i++ {
+
+		result := <-worker
+
+		for key, value := range result {
+			fmt.Println(key + ": " + strings.Join(value, ", "))
+		}
+	}
+
+	wg.Wait()
+
+}
+
+func analizarSubdominio(subdominio string, wg *sync.WaitGroup, chan_dominios chan map[string][]string) {
+
+	defer wg.Done()
+
+	ip, err := net.LookupIP(subdominio)
+
+	if err != nil {
+		color.Red("Error al obtener IP")
+		return
+	}
+
+	dominios := make(map[string][]string)
+
+	// saco el dominio del subdominio y lo guardo en una variable
+
+	subdominioSplit := strings.Split(subdominio, ".")
+
+	dominio := subdominioSplit[len(subdominioSplit)-2] + "." + subdominioSplit[len(subdominioSplit)-1]
+
+	for _, ip := range ip {
+		dominios[subdominio] = []string{ip.String(), dominio}
+	}
+
+	chan_dominios <- dominios
 
 }
 
@@ -581,9 +687,9 @@ func Worker(url string, worker chan [][]string, wg *sync.WaitGroup) {
 
 func obtenerDominios(threads int) {
 
-	color.Yellow("\n[!] Obteniendo dominios de los rangos Ipv4 e Ipv6\n\n")
+	color.Yellow("\n[!] Obteniendo dominios de los rangos Ipv4\n\n")
 
-	// Leo ip_ranges.csv y recogo todos los rangos ipv4 y ipv6
+	// Leo ip_ranges.csv y recogo todos los rangos ipv4
 	file, err := os.Open("ip_ranges.csv")
 
 	if err != nil {
@@ -618,7 +724,7 @@ func obtenerDominios(threads int) {
 
 	// Preparo el archivo dominos.csv
 
-	file, err = os.Create("dominios.csv")
+	file, err = os.Create("dominios_public.csv")
 
 	if err != nil {
 		color.Red("[-] Error al crear el archivo")
@@ -633,7 +739,7 @@ func obtenerDominios(threads int) {
 
 	// Preparo el archivo subdominos.csv
 
-	file, err = os.Create("subdominios.csv")
+	file, err = os.Create("subdominios_public.csv")
 
 	if err != nil {
 		color.Red("[-] Error al crear el archivo")
@@ -731,7 +837,7 @@ func obtenerDominios(threads int) {
 	close(chan_rangos)
 	close(chan_dominios)
 
-	color.Green("\n[+] Archivos creados: dominios.csv, subdominios.csv")
+	color.Green("\n[+] Archivos creados: dominios_public.csv, subdominios_public.csv")
 
 }
 
