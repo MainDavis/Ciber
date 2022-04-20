@@ -68,7 +68,7 @@ func reverseDNS(target string, threads int) {
 
 	color.Yellow("[!] Obteniendo dominios y subdominios de " + target + " ...\n\n")
 
-	url := "https://sonar.omnisint.io/all/" + target
+	url := "https://sonar.omnisint.io/tlds/" + strings.ToLower(target)
 
 	// Llamo a la API
 
@@ -89,76 +89,156 @@ func reverseDNS(target string, threads int) {
 	}
 
 	// Creo un array con los resultados
-	var subdominios []string
+	var dominios []string
 
-	err = json.Unmarshal(body, &subdominios)
+	err = json.Unmarshal(body, &dominios)
 
 	if err != nil {
 		color.Red("Error al leer el JSON")
 		return
 	}
 
-	color.Green("[+] Obtenidos " + strconv.Itoa(len(subdominios)) + " subdominios\n\n")
-	color.Green("[+] Escaneando subdominios ...\n\n")
+	color.Green("[+] Obtenidos " + strconv.Itoa(len(dominios)) + " dominios\n\n")
+	color.Yellow("[!] Escaneando dominios ...\n\n")
 
-	// Escaneo los subdominios
+	// Preparo la barra de progreso
 
-	var wg sync.WaitGroup
-	worker := make(chan map[string][]string, threads)
+	bar := pb.StartNew(len(dominios))
 
-	for _, subdominio := range subdominios {
-		wg.Add(1)
-		/*ip, err := net.LookupIP(subdominio)
+	// Preparo el archivo dominios.csv
 
-		if err != nil {
-			color.Red("Error al obtener IP")
-			continue
-		}
+	fileDom, err := os.Create("dominios.csv")
 
-		for _, ip := range ip {
-			fmt.Println("Domino: " + subdominio + " IP: " + ip.String())
-		}*/
-
-		go analizarSubdominio(subdominio, &wg, worker)
+	if err != nil {
+		color.Red("Error al crear el archivo dominios.csv")
+		return
 	}
 
-	for i := 0; i < len(subdominios); i++ {
+	defer fileDom.Close()
 
-		result := <-worker
+	writerDom := csv.NewWriter(fileDom)
 
-		for key, value := range result {
-			fmt.Println(key + ": " + strings.Join(value, ", "))
+	// Preparo el archivo subdominios.csv
+
+	fileSub, err := os.Create("subdominios.csv")
+
+	if err != nil {
+		color.Red("Error al crear el archivo subdominios.csv")
+		return
+	}
+
+	defer fileSub.Close()
+
+	writerSub := csv.NewWriter(fileSub)
+
+	// Escribo la cabecera
+
+	writerDom.Write([]string{"Dominio", "IP", "Número de subdominios"})
+	writerSub.Write([]string{"Subdominio", "Dominio", "IP"})
+
+	// Escaneo los dominios
+
+	var wg sync.WaitGroup
+
+	workerDom := make(chan map[string][]string, threads)
+	workerSub := make(chan map[string][]string, threads)
+
+	for _, subdominio := range dominios {
+		wg.Add(1)
+		go analizarDominio(subdominio, &wg, workerDom, workerSub, bar)
+	}
+
+	for i := 0; i < len(dominios); i++ {
+
+		dominios := <-workerDom
+		subdominios := <-workerSub
+
+		for key, value := range dominios {
+			writerDom.Write([]string{key, value[0], value[1]})
 		}
+
+		for key, value := range subdominios {
+			writerSub.Write([]string{key, value[0], value[1]})
+		}
+
 	}
 
 	wg.Wait()
 
+	bar.Finish()
+
+	writerDom.Flush()
+	writerSub.Flush()
+
+	color.Green("\n[+] Escaneo finalizado\n\n")
+
+	color.Green("[+] Archivo dominios.csv y subdominios.csv generados\n\n")
+
 }
 
-func analizarSubdominio(subdominio string, wg *sync.WaitGroup, chan_dominios chan map[string][]string) {
+func analizarDominio(dominio string, wg *sync.WaitGroup, chan_dominios chan map[string][]string, chan_subdominios chan map[string][]string, bar *pb.ProgressBar) {
 
 	defer wg.Done()
+	defer bar.Increment()
 
-	ip, err := net.LookupIP(subdominio)
+	ip, err := net.LookupIP(dominio)
 
 	if err != nil {
-		color.Red("Error al obtener IP")
+		chan_dominios <- map[string][]string{}
+		chan_subdominios <- map[string][]string{}
+		return
+	}
+
+	// Obtengo el número de subdominios
+
+	url := "https://sonar.omnisint.io/subdomains/" + strings.ToLower(dominio)
+
+	resp, err := http.Get(url)
+
+	if err != nil {
+		chan_dominios <- map[string][]string{}
+		chan_subdominios <- map[string][]string{}
+		return
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+
+	if err != nil {
+		chan_dominios <- map[string][]string{}
+		chan_subdominios <- map[string][]string{}
+		return
+	}
+
+	var subdominiosList []string
+
+	err = json.Unmarshal(body, &subdominiosList)
+
+	if err != nil {
+		chan_dominios <- map[string][]string{}
+		chan_subdominios <- map[string][]string{}
 		return
 	}
 
 	dominios := make(map[string][]string)
 
-	// saco el dominio del subdominio y lo guardo en una variable
+	dominios[dominio] = []string{ip[0].String(), strconv.Itoa(len(subdominiosList))}
 
-	subdominioSplit := strings.Split(subdominio, ".")
+	subdominios := make(map[string][]string)
 
-	dominio := subdominioSplit[len(subdominioSplit)-2] + "." + subdominioSplit[len(subdominioSplit)-1]
+	for _, subdominio := range subdominiosList {
+		ipSub, err := net.LookupIP(subdominio)
 
-	for _, ip := range ip {
-		dominios[subdominio] = []string{ip.String(), dominio}
+		if err != nil {
+			continue
+		}
+
+		subdominios[subdominio] = []string{dominio, ipSub[0].String()}
 	}
 
 	chan_dominios <- dominios
+	chan_subdominios <- subdominios
 
 }
 
