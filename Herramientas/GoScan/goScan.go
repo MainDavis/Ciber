@@ -1192,3 +1192,7 @@ func uInt32ToIPv4(iPuInt32 uint32) (iP string) {
 		iPuInt32&0x000000FF)
 	return iP
 }
+
+func prueba(target string) {
+
+}
