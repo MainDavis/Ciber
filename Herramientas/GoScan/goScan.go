@@ -75,7 +75,7 @@ func main() {
 		}
 		reverseDNS(target, threads)
 	case "prueba":
-
+		prueba(target)
 	default:
 		color.Red("[X] Modo de ejecución no válido")
 	}
