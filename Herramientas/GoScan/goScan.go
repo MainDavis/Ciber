@@ -12,9 +12,11 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/cheggaaa/pb/v3"
 	"github.com/fatih/color"
@@ -31,7 +33,7 @@ func main() {
 		threads int
 	)
 
-	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tSA: Obtener ASN y Rangos IP\n\tSO: Utiliza la API Sonar para sacar dominios y subdominios (Requiere ip_ranges.csv)\n\tRE: Utiliza REverse DNS para sacar dominios y subdominios")
+	flag.StringVar(&mode, "mode", "", "Modo de ejecución\n\tSA: Obtener ASN y Rangos IP\n\tSO: Utiliza la API Sonar para sacar dominios y subdominios (Requiere ip_ranges.csv)\n\tRE: Utiliza REverse DNS para sacar dominios y subdominios\n\tMS: Escaner TCP contra todos los dominos del archivo dominios.csv")
 	flag.StringVar(&target, "target", "", "Target a escanear")
 	flag.IntVar(&threads, "t", 1, "Número de hilos")
 
@@ -74,12 +76,167 @@ func main() {
 			crearArchivosDom(target)
 		}
 		reverseDNS(target, threads)
+	case "MS":
+		if len(target) == 0 {
+			color.Red("[!] Uso: main.go --mode <mode> --target <taget>\n\n")
+			flag.PrintDefaults()
+			return
+		}
+
+		masscan(target, threads)
+
 	case "prueba":
 		prueba(target)
 	default:
 		color.Red("[X] Modo de ejecución no válido")
 	}
 
+}
+
+func masscan(target string, threads int) {
+
+	// Leo archivo dominios.csv, saco la ip de cada uno y hago un array con todas las ip
+
+	file, err := os.Open(target + "/subdominios.csv")
+
+	if err != nil {
+		color.Red("[-] Error al abrir archivo subdominios.csv")
+	}
+
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+
+	var ips []string
+
+	for {
+
+		line, err := reader.Read()
+
+		if err == io.EOF {
+			break
+		}
+
+		if err != nil {
+			color.Red("[-] Error al leer archivo subdominios.csv")
+		}
+
+		if line[0] == "Dominio" {
+			continue
+		}
+
+		if line[0] == "Subdominio" {
+			continue
+		}
+
+		ips = append(ips, line[0])
+
+	}
+
+	// Creo el archivo services.csv
+
+	fileServices, err := os.Create(target + "/services.csv")
+
+	if err != nil {
+		color.Red("[-] Error al crear archivo services.csv")
+	}
+
+	writer := csv.NewWriter(fileServices)
+
+	defer fileServices.Close()
+
+	writer.Write([]string{"Subdominio", "Puertos"})
+
+	fileServices.Close()
+
+	// Creo una barra de progreso
+
+	bar := pb.StartNew(len(ips))
+
+	for _, ip := range ips {
+
+		portScan(target, ip, threads, bar)
+
+	}
+
+	bar.Finish()
+
+	color.Yellow("\n[+] Escaneo completado\n\n")
+
+}
+
+func portScan(target string, dom string, threads int, bar *pb.ProgressBar) {
+
+	color.Green("[+] Escaneando %s\n", dom)
+
+	defer bar.Increment()
+
+	numPorts := 1024
+
+	wg := sync.WaitGroup{}
+
+	fileServices, err := os.OpenFile(target+"/services.csv", os.O_APPEND|os.O_WRONLY, 0600)
+
+	if err != nil {
+		color.Red("[-] Error al abrir archivo services.csv")
+	}
+
+	defer fileServices.Close()
+
+	writer := csv.NewWriter(fileServices)
+
+	openPorts := make([]string, 0)
+
+	for i := 1; i < numPorts; i++ {
+
+		wg.Add(1)
+
+		go func(i int) {
+
+			defer wg.Done()
+
+			port := strconv.Itoa(i)
+
+			_, err := net.DialTimeout("tcp", dom+":"+port, time.Second)
+
+			if err != nil {
+				return
+			}
+
+			color.Green("[+] %s abierto\n", dom+":"+port)
+
+			openPorts = append(openPorts, port)
+
+		}(i)
+
+	}
+
+	wg.Wait()
+
+	if len(openPorts) > 0 {
+		str_openPorts := strings.Join(strings.Fields(fmt.Sprint(openPorts)), ",")
+		str_openPorts = strings.Replace(str_openPorts, "[", "", -1)
+		str_openPorts = strings.Replace(str_openPorts, "]", "", -1)
+
+		writer.Write([]string{dom, str_openPorts})
+
+		writer.Flush()
+	}
+
+}
+
+func bToMb(b uint64) uint64 {
+	return b / 1024 / 1024
+}
+func PrintMemUsage() {
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
+	fmt.Printf("Alloc = %v MiB", bToMb(m.Alloc))
+	fmt.Printf("\tTotalAlloc = %v MiB", bToMb(m.TotalAlloc))
+	fmt.Printf("\tSys = %v MiB", bToMb(m.Sys))
+	fmt.Printf("\tNumGC = %v\n", m.NumGC)
+	fmt.Printf("\tHeapAlloc = %v MiB", bToMb(m.HeapAlloc))
 }
 
 func crearArchivosDom(target string) {
@@ -150,7 +307,6 @@ func crearArchivosSA(target string) {
 
 	if err != nil {
 		color.Red("[-] Error al crear archivo asn.csv")
-		color.Green(err.Error())
 	}
 
 	defer file.Close()
@@ -165,7 +321,6 @@ func crearArchivosSA(target string) {
 
 	if err != nil {
 		color.Red("[-] Error al crear archivo ip_ranges.csv")
-		color.Green(err.Error())
 	}
 
 	defer file2.Close()
@@ -226,8 +381,6 @@ func reverseDNS(target string, threads int) {
 		return
 	}
 
-	defer fileDom.Close()
-
 	writerDom := csv.NewWriter(fileDom)
 
 	// Preparo el archivo subdominios.csv
@@ -238,8 +391,6 @@ func reverseDNS(target string, threads int) {
 		color.Red("Error al crear el archivo subdominios.csv")
 		return
 	}
-
-	defer fileSub.Close()
 
 	writerSub := csv.NewWriter(fileSub)
 
@@ -280,6 +431,12 @@ func reverseDNS(target string, threads int) {
 	color.Green("\n[+] Escaneo finalizado\n\n")
 
 	color.Green("[+] Archivo dominios.csv y subdominios.csv generados\n\n")
+
+	fileDom.Close()
+	fileSub.Close()
+
+	quitarDuplicados(target, "dominios.csv")
+	quitarDuplicados(target, "subdominios.csv")
 
 }
 
@@ -335,6 +492,9 @@ func analizarDominio(dominio string, wg *sync.WaitGroup, chan_dominios chan map[
 	subdominios := make(map[string][]string)
 
 	for _, subdominio := range subdominiosList {
+
+		bar.SetTemplateString(subdominio + " [{{bar . }}] {{counters . }}")
+
 		ipSub, err := net.LookupIP(subdominio)
 
 		if err != nil {
@@ -361,158 +521,81 @@ func ASNscan(target string, threads int) {
 
 	color.Yellow("[!] Eliminando duplicados en asn.csv e ip_ranges.csv ...\n")
 
-	quitarDuplicados(target)
+	quitarDuplicados(target, "asn.csv")
+	quitarDuplicados(target, "ip_ranges.csv")
 }
 
-func quitarDuplicados(target string) {
+func quitarDuplicados(target string, name string) {
 
-	// Quito las filas que tienen el mismo Rango en asn.csv
-
-	fileASN, err := os.OpenFile(target+"/asn.csv", os.O_APPEND, 0777)
+	file, err := os.OpenFile(target+"/"+name, os.O_APPEND, 0777)
 
 	if err != nil {
-		color.Red("[X] Error al abrir asn.csv")
-		return
-	}
-
-	defer fileASN.Close()
-
-	readerASN := csv.NewReader(fileASN)
-
-	readerASN.Comma = ','
-
-	readerASN.FieldsPerRecord = -1
-
-	recordsASN, err := readerASN.ReadAll()
-
-	if err != nil {
-
-		color.Red("[X] Error al leer asn.csv")
+		color.Red("Error al abrir el archivo " + name)
 		color.Green(err.Error())
 		return
 	}
 
-	var resultASN [][]string
+	defer file.Close()
 
-	for _, record := range recordsASN {
+	reader := csv.NewReader(file)
 
+	reader.Comma = ','
+
+	reader.FieldsPerRecord = -1
+
+	record, err := reader.ReadAll()
+
+	if err != nil {
+		color.Red("Error al leer el archivo " + name)
+		return
+	}
+
+	var result [][]string
+
+	for _, row := range record {
 		var duplicado bool
 
-		for index, record2 := range resultASN {
+		for index, row2 := range result {
 
-			if record[0] == record2[0] {
+			if row[0] == row2[0] {
 				duplicado = true
 			}
 
 			//Añado la información que tiene la fila duplicada que no está en la primera
 
-			for i := 1; i <= 3; i++ {
-				if record2[i] == "" && record[i] != "" {
-					resultASN[index][i] = record[i]
+			for i := 1; i <= len(row2)-1; i++ {
+				if row2[i] == "" && row[i] != "" {
+					result[index][i] = row[i]
 				}
 
 			}
 		}
 
 		if !duplicado {
-			resultASN = append(resultASN, record)
+			result = append(result, row)
 		}
-
 	}
 
-	// Reescribo el archivo asn.csv
+	// Reescribo el archivo
 
-	fileASN, err = os.Create(target + "/asn.csv")
+	file, err = os.Create(target + "/" + name)
 
 	if err != nil {
-		color.Red("[X] Error al recrear asn.csv")
+		color.Red("[X] Error al recrear " + name)
 		return
 	}
 
-	defer fileASN.Close()
+	defer file.Close()
 
-	writerASN := csv.NewWriter(fileASN)
+	writerASN := csv.NewWriter(file)
 
 	writerASN.Comma = ','
 
-	writerASN.WriteAll(resultASN)
+	writerASN.WriteAll(result)
 
 	writerASN.Flush()
 
-	// Quito las filas que tienen el mismo Rango en ip_ranges.csv
-
-	fileIPRanges, err := os.OpenFile(target+"/ip_ranges.csv", os.O_APPEND|os.O_RDWR, 0600)
-
-	if err != nil {
-		color.Red("[X] Error al abrir ip_ranges.csv")
-		return
-	}
-
-	defer fileIPRanges.Close()
-
-	readerIPRanges := csv.NewReader(fileIPRanges)
-	readerIPRanges.Comma = ','
-	readerIPRanges.FieldsPerRecord = -1
-	recordsIPRanges, err := readerIPRanges.ReadAll()
-
-	if err != nil {
-
-		color.Red("[X] Error al leer ip_ranges.csv")
-		return
-	}
-
-	var resultIPRanges [][]string
-
-	for _, record := range recordsIPRanges {
-
-		var duplicado bool
-
-		for index, record2 := range resultIPRanges {
-
-			if record[0] == record2[0] {
-				duplicado = true
-
-				//Añado la información que tiene la fila duplicada que no está en la primera
-
-				for i := 1; i <= 5; i++ {
-
-					if record2[i] == "" && record[i] != "" {
-						resultIPRanges[index][i] = record[i]
-					}
-
-				}
-
-			}
-		}
-
-		if !duplicado {
-			resultIPRanges = append(resultIPRanges, record)
-		}
-
-	}
-
-	// Reescribo el archivo ip_ranges.csv
-
-	fileIPRanges, err = os.Create(target + "/ip_ranges.csv")
-
-	if err != nil {
-		color.Red("[X] Error al recrear ip_ranges.csv")
-		return
-	}
-
-	defer fileIPRanges.Close()
-
-	writerIPRanges := csv.NewWriter(fileIPRanges)
-
-	writerIPRanges.Comma = ','
-
-	writerIPRanges.WriteAll(resultIPRanges)
-
-	writerIPRanges.Flush()
-
-	color.Green("\n[+] Eliminación completada")
-
-	color.Yellow("\n[+] Escaneo completado\n\n")
+	color.Green("[+] Eliminados duplicados en " + name + "\n")
 
 }
 
@@ -917,7 +1000,6 @@ func obtenerDominios(target string, threads int) {
 
 		if err != nil {
 			color.Red("[-] Error al leer el archivo")
-			color.Green(err.Error())
 			return
 		}
 
@@ -934,7 +1016,6 @@ func obtenerDominios(target string, threads int) {
 
 	if err != nil {
 		color.Red("[-] Error al abrir el archivo dominios.csv")
-		color.Green(err.Error())
 		return
 	}
 
@@ -1039,6 +1120,9 @@ func obtenerDominios(target string, threads int) {
 	close(chan_dominios)
 
 	color.Green("\n[+] Archivos creados: dominios.csv, subdominios.csv\n\n")
+
+	quitarDuplicados(target, "dominios.csv")
+	quitarDuplicados(target, "subdominios.csv")
 
 }
 

@@ -1,0 +1,43 @@
+
+
+#### CLOUD_ENUM 21/04/2022 16:53:27 ####
+aws,Protected S3 Bucket,http://hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai1.s3.amazonaws.com/,protected
+aws,OPEN S3 BUCKET,http://hyundai2.s3.amazonaws.com/,public
+aws,Protected S3 Bucket,http://hyundai2020.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai-admin.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://aws-hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundaibucket.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundaice.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://cf-hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai.com.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundaidev.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai-images.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai-img.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://media-hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundaipublic.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://s3-hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai-stage.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://stage-hyundai.s3.amazonaws.com/,protected
+aws,Protected S3 Bucket,http://hyundai-test.s3.amazonaws.com/,protected
+aws,OPEN S3 BUCKET,http://hyundai-videos.s3.amazonaws.com/,public
+aws,Protected S3 Bucket,http://hyundai-website.s3.amazonaws.com/,protected
+aws,AWS App Found:,https://hyundai.awsapps.com,protected
+azure,HTTP-OK Storage Account,http://hyundai.blob.core.windows.net/,public
+azure,HTTP-OK Storage Account,http://hyundaifunctions.blob.core.windows.net/,public
+azure,HTTP-OK Storage Account,http://storagehyundai.blob.core.windows.net/,public
+azure,HTTPS-Only Storage Account,http://hyundaistore.blob.core.windows.net/,public
+azure,HTTPS-Only Storage Account,http://hyundaitest.blob.core.windows.net/,public
+azure,Registered Azure Website DNS Name,hyundai.azurewebsites.net,public
+azure,Registered Azure Website DNS Name,hyundaifunctions.azurewebsites.net,public
+azure,Registered Azure Website DNS Name,hyundai-functions.azurewebsites.net,public
+azure,Registered Azure Database DNS Name,hyundai.database.windows.net,public
+azure,Registered Azure Database DNS Name,hyundaisql.database.windows.net,public
+gcp,Protected Google Bucket,http://storage.googleapis.com/hyundaibucket,protected
+gcp,OPEN GOOGLE BUCKET,http://storage.googleapis.com/static-hyundai,public
+gcp,The Firebase database has been deactivated.,https://hyundai-2017.firebaseio.com/.json,disabled
+gcp,The Firebase database has been deactivated.,https://hyundai-admin.firebaseio.com/.json,disabled
+gcp,Protected Google Firebase RTDB,https://hyundai-ce.firebaseio.com/.json,protected
+gcp,OPEN GOOGLE FIREBASE RTDB,https://hyundai-dev.firebaseio.com/.json,public
+gcp,Protected Google Firebase RTDB,https://hyundai-ios.firebaseio.com/.json,protected
+gcp,Protected Google Firebase RTDB,https://hyundai-landing.firebaseio.com/.json,protected
